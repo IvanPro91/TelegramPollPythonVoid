@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Урок по основам работы с переменными в Python для начинающих программистов">
+    <meta name="keywords" content="Python, переменные, программирование, уроки Python, изучение Python, основы Python">
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/all.min.css' %}">
+    <script src="{% static 'js/twain.js' %}"></script>
+    <script src="{% static 'js/telegram-web-app.js' %}"></script>
+
+
+    <!--
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+-->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'python-blue': '#306998',
+                        'python-yellow': '#FFD43B',
+                    },
+                    fontFamily: {
+                        'sans': ['Nunito', 'sans-serif'],
+                        'code': ['Fira Code', 'monospace'],
+                    },
+                    boxShadow: {
+                        'python': '0 4px 14px -2px rgba(48, 105, 152, 0.25)',
+                    }
+                }
+            }
+        }
+    </script>
+
+
+
+    <style>
+        .code-block {
+            position: relative;
+            background-color: #2d2d2d;
+            color: #f1f1f1;
+            border-radius: 0.5rem;
+            padding: 1.5rem 1rem 1.5rem 3rem;
+            font-family: 'Fira Code', monospace;
+            font-size: 1rem;
+            line-height: 1.75;
+            overflow-x: auto;
+        }
+
+        .code-block::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            width: 2.5rem;
+            background-color: #252525;
+            border-radius: 0.5rem 0 0 0.5rem;
+        }
+
+        .code-block code {
+            counter-reset: line;
+        }
+
+        .code-block code .line {
+            position: relative;
+            display: block;
+            padding-left: 1rem;
+        }
+
+        .code-block code .line::before {
+            counter-increment: line;
+            content: counter(line);
+            position: absolute;
+            left: -2.5rem;
+            width: 2.5rem;
+            text-align: right;
+            padding-right: 0.5rem;
+            color: #6c6c6c;
+            font-size: 0.9rem;
+        }
+
+        .quiz-option {
+            transition: all 0.3s ease;
+        }
+
+        .quiz-option:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px -2px rgba(0, 0, 0, 0.1);
+        }
+
+        .poll-question {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .poll-question::before {
+            content: "?";
+            position: absolute;
+            top: -20px;
+            right: -20px;
+            font-size: 10rem;
+            font-weight: bold;
+            color: rgba(48, 105, 152, 0.05);
+            z-index: 0;
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-blue-50 to-indigo-50 min-h-screen">
+    {% include 'base/menu.html' %}
+
+    <main class="flex flex-col min-h-screen">
+        {% block content %}{% endblock %}
+    </main>
+
+     {% include 'base/footer.html' %}
+    <script>
+        let tg = window.Telegram.WebApp;
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                if (!mobileMenu.classList.contains('hidden')) {
+                    mobileMenu.classList.add('hidden');
+                }
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
