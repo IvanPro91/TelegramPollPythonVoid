@@ -2,13 +2,16 @@ import os
 from pathlib import Path
 from dotenv import load_dotenv
 
+
 load_dotenv()
 
 BASE_DIR = Path(__file__).resolve().parent.parent
+print("BASE_DIR", BASE_DIR)
 
 SECRET_KEY = os.getenv("ENV_SECRET_KEY")
-DEBUG = os.getenv("ENV_DEBUG") == "True"
-ALLOWED_HOSTS = ["*"]
+DEBUG = True
+AUTORELOAD = True
+ALLOWED_HOSTS = ["api-v1.ru", "www.api-v1.ru", "localhost", "127.0.0.1", "192.168.31.50", "91.243.98.34"]
 
 TELEGRAM_BOT_TOKEN = os.getenv("TOKEN")
 
@@ -102,3 +105,9 @@ MEDIA_ROOT = "media/"
 DATA_UPLOAD_MAX_NUMBER_FIELDS = 5000
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 AUTH_USER_MODEL = "user.User"
+SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
+SECURE_SSL_REDIRECT = True
+
+# Безопасные куки
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True

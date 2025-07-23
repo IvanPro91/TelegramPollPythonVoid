@@ -3,28 +3,35 @@
 {% block title %}Викторина{% endblock %}
 {% block content %}
 
-<section class="bg-gray-50 rounded-xl p-6 border border-gray-200">
-    <h3 class="text-2xl font-semibold text-gray-800 mb-6 text-center">Проверьте свои знания</h3>
-    <form class="space-y-8" id="quiz-form">
-        <div class="p-5 bg-white rounded-lg border border-gray-200 shadow-sm">
-            <h4 class="text-xl font-medium text-gray-800 mb-4">Вопрос {{ poll.id_poll }}: {{ poll.quest }}</h4>
-            <div class="space-y-3">
-                {% for answer in poll.answers %}
-                    <label class="quiz-option flex items-center p-3 border-2 border-gray-200 rounded-lg cursor-pointer hover:bg-gray-50">
-                        <input class="h-5 w-5 text-indigo-600 mr-3" name="question" type="radio" value="a">
-                        <span> {{ answer }}</span>
-                    </label>
-                {% endfor %}
-            </div>
-        </div>
+<div class="bg-[#2D3E40] rounded-xl p-6 shadow-lg" id="quiz-screen">
+    {% if poll.code %}
+    <div class="code-editor mb-4 p-2">
+        <pre style="overflow-x: auto; white-space: pre-wrap;"><code
+                class="language-python p-0">{{ poll.code|escape }}</code></pre>
+    </div>
+    {% endif %}
 
-        <div class="text-center pt-4">
-            <button class="bg-indigo-600 hover:bg-indigo-700 text-white px-8 py-3 rounded-lg font-medium text-lg transition duration-300 shadow-md hover:shadow-lg"
-                    type="submit">
-                Проверить ответы
-            </button>
+    <div class="mb-8">
+        <h2 class="text-xl font-semibold mb-4 text-[#FEFFFF]" id="question">
+        {{ poll.quest }}
+            <br>
+        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+            {{ poll.level }}
+        </span>
+        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
+            #{{ poll.pk }}
+        </span>
+        </h2>
+    </div>
+
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8" id="options">
+        {% for answer in poll.answers %}
+        <div class="option bg-[#3D4F52] rounded-lg p-4 cursor-pointer transition-all duration-300 hover:bg-[#4A5F63]"
+             data-index="{{ forloop.counter0 }}" id="btn_answer" onclick="chk_answer('{{ poll.pk }}', '{{ forloop.counter0 }}')">{{ answer }}
         </div>
-    </form>
-</section>
+        {% endfor %}
+    </div>
+</div>
 
 {% endblock %}

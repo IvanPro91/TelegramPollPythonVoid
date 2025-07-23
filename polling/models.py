@@ -28,11 +28,12 @@ class Level(models.Model):
 class Poll(models.Model):
     """Для викторин"""
 
-    id_poll = models.CharField(max_length=200, verbose_name="Номер созданной викторины", null=True)
-    quest = models.CharField(max_length=200, verbose_name="Вопрос")
-    answers = ArrayField(models.CharField(max_length=200), blank=True, default=list, verbose_name="Список ответов")
+    id_poll = models.TextField(verbose_name="Номер созданной викторины", null=True)
+    quest = models.TextField(verbose_name="Вопрос")
+    code = models.TextField(verbose_name="Вопрос")
+    answers = ArrayField(models.CharField(max_length=500), blank=True, default=list, verbose_name="Список ответов")
     current_answer = models.PositiveIntegerField(verbose_name="Номер правильного ответа")
-    hint = models.CharField(max_length=250, verbose_name="Объяснение")
+    hint = models.TextField(verbose_name="Объяснение")
     level = models.ForeignKey(Level, on_delete=models.SET_NULL, null=True)
     created_at = models.DateTimeField(auto_now_add=True, null=True)
 
