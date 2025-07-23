@@ -2,16 +2,15 @@ import os
 from pathlib import Path
 from dotenv import load_dotenv
 
-
 load_dotenv()
 
 BASE_DIR = Path(__file__).resolve().parent.parent
-print("BASE_DIR", BASE_DIR)
 
 SECRET_KEY = os.getenv("ENV_SECRET_KEY")
-DEBUG = True
+TEXT_COINS_CARD = os.getenv("TEXT_COINS_CARD")
+DEBUG = False
 AUTORELOAD = True
-ALLOWED_HOSTS = ["api-v1.ru", "www.api-v1.ru", "localhost", "127.0.0.1", "192.168.31.50", "91.243.98.34"]
+ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS").split(",")
 
 TELEGRAM_BOT_TOKEN = os.getenv("TOKEN")
 
