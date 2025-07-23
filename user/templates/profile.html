@@ -1,0 +1,18 @@
+{% extends 'base/base_template.html' %}
+
+{% block title %}Викторина{% endblock %}
+{% block content %}
+
+<div class="bg-[#2D3E40] rounded-xl p-6 shadow-lg" id="quiz-screen">
+    Пользователь:
+    <br>
+    <p>Номер пользователя : {{ user.user_id }}</p>
+    <p>Никнейм : {{ user.username }}</p>
+    <p>Имя : {{ user.first_name }}</p>
+    <p>Фамилия : {{ user.last_name }}</p>
+    <p>Кол-во побед : {{ user.count_winner }}</p>
+    <p>Рейтинг : {{ user.position_user }}</p>
+    <p>Активность : {{ user.last_activity }}</p>
+</div>
+
+{% endblock %}

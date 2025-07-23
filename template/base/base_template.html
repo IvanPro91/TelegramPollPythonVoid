@@ -134,6 +134,8 @@
     let user_id = tg.initDataUnsafe.user.id;
     elem_username.text(first_name + " " + last_name + " @" + username);
 
+    $('.href-profile').prop('href', '/profile/' + user_id)
+
     $("#btn_next_poll").click(function () {
         location.reload();
     })
