@@ -97,8 +97,9 @@
 
 </head>
 <body class="text-white">
+{% include 'base/menu.html' %}
+
 <div class="container mx-auto px-4 py-8 max-w-4xl">
-    {% include 'base/menu.html' %}
     <main>
         {% block content %}{% endblock %}
     </main>
@@ -143,18 +144,24 @@
     })
 
     $("#btn_coins").click(function () {
-        alert("Вы можете поддержать разработчика:\n\nкарта сбербанк 2202200208407435 Иван Анатольевич Д. ")
+        alert("{{ TEXT_COINS_CARD }}")
     })
 
-    function chk_answer(id_poll, index_answer) {
+    function chk_answer(btn, id_poll, index_answer) {
         let current_answer = '{{ poll.current_answer }}'
         if (current_answer === index_answer) {
-            modal_text_header.text("Ответ верный! +1 балл");
+            $(btn).css({
+                'background-color': '#28a745',
+                'color': 'white',
+                'position': 'relative'
+            });
+            setTimeout(function() {
+                location.reload()
+            }, 1000);
         } else {
             modal_text_header.html("Ответ не верный! -1 балл<br>{{ poll.hint }}");
+            $("#modal_window").modal('show');
         }
-        $("#modal_window").modal('show');
-        //alert("Отладка: \n" + user_id + "\n" + username + "\n" + id_poll + "\n" + index_answer);
-    };
+    }
 </script>
 </html>

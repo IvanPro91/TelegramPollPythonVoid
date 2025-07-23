@@ -42,7 +42,7 @@ class Poll(models.Model):
 
     @sync_to_async
     def do_poll(self, poll_id):
-        """anonymous - если приватный, то накапливаем баллы"""
+        """anonymous - если приватный, иначе накапливаем баллы"""
         if poll_id:
             random_poll = Poll.objects.get(id_poll=poll_id)
         else:
@@ -61,7 +61,7 @@ class Poll(models.Model):
 
     @sync_to_async
     def to_dict(self):
-        """anonymous - если приватный, то накапливаем баллы"""
+        """перевод объекта модели в dict"""
         poll = Poll.objects.all()
         random_poll = poll[random.randint(0, len(poll) - 1)]
         data = {
