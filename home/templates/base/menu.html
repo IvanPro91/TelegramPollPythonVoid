@@ -1,48 +1,15 @@
-<nav class="bg-white shadow-lg sticky top-0 z-50">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex justify-between h-16">
-            <div class="flex items-center">
-                <div class="flex-shrink-0 flex items-center">
-                    <span class="text-xl font-bold text-gray-900">Кодинг Python</span>
-                </div>
-            </div>
-            <div class="hidden md:flex items-center space-x-8">
-                <a class="text-gray-700 hover:text-blue-600 px-3 py-2 text-sm font-medium" href="{% url 'home:home' %}">Викторина</a>
-                <a class="text-gray-700 hover:text-blue-600 px-3 py-2 text-sm font-medium" href="#">Разбор кода</a>
-                <a class="text-gray-700 hover:text-blue-600 px-3 py-2 text-sm font-medium" href="#">Рейтинг</a>
-                <a class="text-gray-700 hover:text-blue-600 px-3 py-2 text-sm font-medium" href="#">Профиль</a>
-            </div>
-            <div class="md:hidden flex items-center">
-                <button class="text-gray-500 hover:text-gray-900 focus:outline-none" id="mobile-menu-button">
-                    <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-menu-2"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 6l16 0" /><path d="M4 12l16 0" /><path d="M4 18l16 0" /></svg>
-                </button>
-            </div>
-        </div>
+{% load static %}
+<header class="flex flex-col items-center mb-8">
+    <div class="logo-python w-24 h-24 rounded-full flex items-center justify-center mb-4">
+        <img class="icon" src="{% static 'icons/python-svgrepo-com.svg' %}" alt="dots icon">
     </div>
-
-    <!-- Mobile menu -->
-    <div class="mobile-menu md:hidden bg-white shadow-lg hidden" id="mobile-menu">
-        <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-            <a class="block px-3 py-2 text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50"
-               href="{% url 'home:home' %}">Викторина</a>
-            <a class="block px-3 py-2 text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50"
-               href="#">Разбор кода</a>
-            <a class="block px-3 py-2 text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50"
-               href="#">Рейтинг</a>
-            <a class="block px-3 py-2 text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50"
-               href="#">Профиль</a>
-        </div>
-    </div>
-</nav>
-
-<header class="bg-gradient-to-r from-python-blue to-python-yellow py-14 relative overflow-hidden">
-    <div class="absolute top-0 left-0 w-full h-full opacity-10">
-        <div class="absolute top-20 left-40 transform rotate-45">
-            <span class="text-9xl font-bold">{ }</span>
-        </div>
-    </div>
-    <div class="container mx-auto px-4 relative z-10">
-        <h1 class="text-4xl md:text-5xl font-bold text-white drop-shadow-lg text-center py-4">Викторина по Python</h1>
-        <p class="text-xl text-white text-opacity-90 text-center mb-2">Прохождение викторин по Python</p>
-    </div>
+    <h1 class="text-4xl font-bold text-center">
+        <span class="text-[#F6C32C]">Python</span>
+        <span class="text-[#FEFFFF]">Викторина</span>
+    </h1>
+    <p class="text-gray-300 mt-2 text-center">
+        Проверь свои знания Python!
+        <br>
+        <a id="name_tg"></a>
+    </p>
 </header>

@@ -2,6 +2,7 @@ import asyncio
 import threading
 
 from django.apps import AppConfig
+
 from bot.handlers import dp, bot_s
 
 

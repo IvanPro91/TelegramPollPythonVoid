@@ -3,141 +3,158 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Урок по основам работы с переменными в Python для начинающих программистов">
-    <meta name="keywords" content="Python, переменные, программирование, уроки Python, изучение Python, основы Python">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="Урок по основам работы с переменными в Python для начинающих программистов" name="description">
+    <meta content="Python, переменные, программирование, уроки Python, изучение Python, основы Python" name="keywords">
     <title>{% block title %}{% endblock %}</title>
-    <link rel="stylesheet" href="{% static 'css/all.min.css' %}">
     <script src="{% static 'js/twain.js' %}"></script>
-    <script src="{% static 'js/telegram-web-app.js' %}"></script>
-
-
-    <!--
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
--->
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        'python-blue': '#306998',
-                        'python-yellow': '#FFD43B',
-                    },
-                    fontFamily: {
-                        'sans': ['Nunito', 'sans-serif'],
-                        'code': ['Fira Code', 'monospace'],
-                    },
-                    boxShadow: {
-                        'python': '0 4px 14px -2px rgba(48, 105, 152, 0.25)',
-                    }
-                }
-            }
-        }
-    </script>
-
-
-
+    <link href="{% static 'css/Font Awesome.css' %}" rel="stylesheet">
+    <link href="{% static 'css/default.min.css' %}" rel="stylesheet">
+    <script src="{% static 'js/highlight.min.js' %}"></script>
+    <script src="{% static 'js/python.min.js' %}"></script>
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>hljs.highlightAll();</script>
     <style>
-        .code-block {
-            position: relative;
-            background-color: #2d2d2d;
-            color: #f1f1f1;
-            border-radius: 0.5rem;
-            padding: 1.5rem 1rem 1.5rem 3rem;
-            font-family: 'Fira Code', monospace;
-            font-size: 1rem;
-            line-height: 1.75;
-            overflow-x: auto;
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #293436;
+            min-height: 100vh;
         }
 
-        .code-block::before {
+        .logo-python {
+            position: relative;
+        }
+
+        .logo-python::before {
             content: "";
             position: absolute;
             top: 0;
             left: 0;
-            bottom: 0;
-            width: 2.5rem;
-            background-color: #252525;
-            border-radius: 0.5rem 0 0 0.5rem;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(246, 195, 44, 0.3) 0%, rgba(254, 255, 255, 0) 70%);
+            border-radius: 50%;
         }
 
-        .code-block code {
-            counter-reset: line;
+        .option:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
         }
 
-        .code-block code .line {
-            position: relative;
-            display: block;
-            padding-left: 1rem;
+        .progress-bar {
+            transition: width 0.5s ease-in-out;
         }
 
-        .code-block code .line::before {
-            counter-increment: line;
-            content: counter(line);
-            position: absolute;
-            left: -2.5rem;
-            width: 2.5rem;
-            text-align: right;
-            padding-right: 0.5rem;
-            color: #6c6c6c;
-            font-size: 0.9rem;
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+            100% {
+                transform: scale(1);
+            }
         }
 
-        .quiz-option {
-            transition: all 0.3s ease;
+        .pulse {
+            animation: pulse 1.5s infinite;
         }
 
-        .quiz-option:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 10px -2px rgba(0, 0, 0, 0.1);
+        .code-editor {
+            font-family: 'Courier New', monospace;
+            background-color: #f3f3f3;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            tab-size: 4;
         }
 
-        .poll-question {
-            position: relative;
-            overflow: hidden;
+        .code-keyword {
+            color: #c678dd;
         }
 
-        .poll-question::before {
-            content: "?";
-            position: absolute;
-            top: -20px;
-            right: -20px;
-            font-size: 10rem;
-            font-weight: bold;
-            color: rgba(48, 105, 152, 0.05);
-            z-index: 0;
+        .code-function {
+            color: #61afef;
         }
+
+        .code-string {
+            color: #98c379;
+        }
+
+        .code-comment {
+            color: #5c6370;
+            font-style: italic;
+        }
+
+        .code-number {
+            color: #d19a66;
+        }
+
     </style>
-</head>
-<body class="bg-gradient-to-br from-blue-50 to-indigo-50 min-h-screen">
-    {% include 'base/menu.html' %}
 
-    <main class="flex flex-col min-h-screen">
+</head>
+<body class="text-white">
+<div class="container mx-auto px-4 py-8 max-w-4xl">
+    {% include 'base/menu.html' %}
+    <main>
         {% block content %}{% endblock %}
     </main>
+</div>
 
-     {% include 'base/footer.html' %}
-    <script>
-        let tg = window.Telegram.WebApp;
-        const mobileMenuButton = document.getElementById('mobile-menu-button');
-        const mobileMenu = document.getElementById('mobile-menu');
+<div aria-hidden="true" aria-labelledby="staticBackdropLabel" class="modal" data-bs-backdrop="static" data-bs-keyboard="false"
+     id="modal_window" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-body text-black" id="modal_text_header">
+                Заголовок
+            </div>
+            <div class="modal-footer">
+                <a class="btn-sm btn btn-danger" data-bs-dismiss="modal" id="btn_invalid_poll"
+                   type="button">Исправить</a>
+                <a class="btn-sm btn btn-success ms-auto" data-bs-dismiss="modal" id="btn_next_poll" type="button">Продолжить</a>
+            </div>
+        </div>
+    </div>
+</div>
 
-        mobileMenuButton.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
-        });
-
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                if (!mobileMenu.classList.contains('hidden')) {
-                    mobileMenu.classList.add('hidden');
-                }
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
-            });
-        });
-    </script>
+{% include 'base/footer.html' %}
 </body>
+<script src="{% static 'js/telegram-web-app.js' %}"></script>
+<script>
+    let tg = window.Telegram.WebApp;
+    let elem_username = $('#name_tg');
+    let modal_text_header = $('#modal_text_header');
+    let first_name = tg.initDataUnsafe.user.first_name || "";
+    let last_name = tg.initDataUnsafe.user.last_name || "";
+    let username = tg.initDataUnsafe.user.username || "";
+    let user_id = tg.initDataUnsafe.user.id;
+    elem_username.text(first_name + " " + last_name + " @" + username);
+
+    $("#btn_next_poll").click(function () {
+        location.reload();
+    })
+
+    $("#btn_invalid_poll").click(function () {
+        alert("Тут отправка на исправление, после закрытия обновление страницы!")
+        location.reload();
+    })
+
+    $("#btn_coins").click(function () {
+        alert("Вы можете поддержать разработчика:\n\nкарта сбербанк 2202200208407435 Иван Анатольевич Д. ")
+    })
+
+    function chk_answer(id_poll, index_answer) {
+        let current_answer = '{{ poll.current_answer }}'
+        if (current_answer === index_answer) {
+            modal_text_header.text("Ответ верный! +1 балл");
+        } else {
+            modal_text_header.html("Ответ не верный! -1 балл<br>{{ poll.hint }}");
+        }
+        $("#modal_window").modal('show');
+        //alert("Отладка: \n" + user_id + "\n" + username + "\n" + id_poll + "\n" + index_answer);
+    };
+</script>
 </html>
